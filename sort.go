@@ -17,24 +17,28 @@ func main() {
 	array = []int{2, 1, 7, 0, 10, 17, 89, 90, 11, 12, -6, 900, 11, 8, 72}
 	SelectenSort(array)
 	fmt.Println(array)
+
+	array = []int{2, 1, 7, 0, 10, 17, 89, 90, 11, 12, -6, 900, 11, 8, 72}
+	StoogeSort(array,0, len(array)-1)
+	fmt.Println(array)
 }
 
 //冒泡排序
-func BubbleSort(a []int) {
-	ilength := len(a)
+func BubbleSort(arr []int) {
+	ilength := len(arr)
 	for i := 0; i < ilength; i++ {
 		for j := ilength - 1; j > i; j-- {
-			if a[j] < a[j-1] {
-				a[j], a[j-1] = a[j-1], a[j]
+			if arr[j] < arr[j-1] {
+				arr[j], arr[j-1] = arr[j-1], arr[j]
 			}
 		}
 	}
 }
 
 //选择排序
-func SelectenSort(a []int) {
+func SelectenSort(arr []int) {
 
-	ilength := len(a)
+	ilength := len(arr)
 	if ilength <= 1 {
 		return
 	}
@@ -42,35 +46,56 @@ func SelectenSort(a []int) {
 
 		minindex := i
 		for j := ilength - 1; j > i; j-- {
-			if a[j] < a[minindex] {
+			if arr[j] < arr[minindex] {
 				minindex = j
 			}
 		}
 		if minindex != i {
-			a[minindex], a[i] = a[i], a[minindex]
+			arr[minindex], arr[i] = arr[i], arr[minindex]
 		}
 	}
 }
 
 //快速排序
-func QuickSort(a []int, left, right int) {
+func QuickSort(arr []int, left, right int) {
 
 	if left >= right {
 		return
 	}
 	i, j := left, right
-	key := a[left]
+	key := arr[left]
 	for i < j {
-		for i < j && key < a[j] {
+		for i < j && key < arr[j] {
 			j--
 		}
-		a[i] = a[j]
-		for i < j && key >= a[i] {
+		arr[i] = arr[j]
+		for i < j && key >= arr[i] {
 			i++
 		}
-		a[j] = a[i]
+		arr[j] = arr[i]
 	}
-	a[i] = key
-	QuickSort(a, 0, i-1)
-	QuickSort(a, i+1, right)
+	arr[i] = key
+	QuickSort(arr, 0, i-1)
+	QuickSort(arr, i+1, right)
 }
+
+//完美排序
+//https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651961719&idx=1&sn=b8f2ebe649912e473b94c5fe8f7ed944&chksm=bd2d0cab8a5a85bda04322422b6f00c13aa39012cef3f992cc73607d8cc3fbe3d1a9569f5330&scene=21#wechat_redirect
+func  StoogeSort(arr []int, i, j int){
+
+	if (arr[i]>arr[j])  { //交换
+		arr[i], arr[j] = arr[j], arr[i]
+	}
+
+	if (i+1>=j) { // 是否结束
+		return 
+	}
+
+	k := (j-i+1)/3 // 三等分
+
+	StoogeSort(arr, i, j-k); // 前2/3半区
+	StoogeSort(arr, i+k, j); // 后2/3半区
+	StoogeSort(arr, i, j-k); // 前2/3半区
+
+}
+
