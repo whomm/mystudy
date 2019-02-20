@@ -21,6 +21,10 @@ func main() {
 	array = []int{2, 1, 7, 0, 10, 17, 89, 90, 11, 12, -6, 900, 11, 8, 72}
 	StoogeSort(array,0, len(array)-1)
 	fmt.Println(array)
+
+	for  x := range array {
+		fmt.Println(x)
+	}
 }
 
 //冒泡排序
@@ -99,3 +103,22 @@ func  StoogeSort(arr []int, i, j int){
 
 }
 
+/*
+func dicsortout(arr []int, now, length int) {
+	
+	if (now == length){
+		fmt.Println(arr)
+		return
+	}
+	
+	if now - 1 >= 0{
+		mysort := xsort(arr, now-1 ,length)
+		for  x := range(mysqort) {
+			arr[now-1] = theone
+			arr[now: length] = other
+			dicsortout( arr, now+1, length)
+		}
+	}
+
+}
+*/
